@@ -1,6 +1,6 @@
 # bancocapgemini
 
-> Prova de conceito proposta pela Capgemini, consumo dos endpoints geridos pelo projeto Banco-Capgemini feito em Laravel 5.2.*
+> Prova de conceito proposta pela Capgemini, consumo dos endpoints geridos pelo projeto Banco-Capgemini feito em Laravel 5.4.*
 
 ## Build Setup
 
