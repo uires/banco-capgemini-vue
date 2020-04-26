@@ -49,6 +49,7 @@
   </div>
 </template>
 <script>
+import { header, apiUrl, getHeader } from '../../config.js';
 export default {
   data() {
     return {
@@ -60,18 +61,19 @@ export default {
   },
   methods: {
     transacao() {
-      console.log(this.tipo);
 
       if (this.tipo == "DEPOSITO") {
         
-        this.$http.post("http://localhost:8000/contacorrente/depositar/" + this.numeroConta + "/" + this.agencia, { valor: this.valor, tipo: this.tipo })
+        this.$http.post(apiUrl + "/contacorrente/depositar/" + this.numeroConta + "/" + this.agencia, 
+          { valor: this.valor, tipo: this.tipo }, { headers: getHeader()})
           .then(
-            () => this.$swal('Hello Vue world!!!'),
+            () => this.$swal('Deposito realizado com sucesso'),
             err => alert('Ocorreu um erro ao relizar o deposito!')
           );
       } else {
 
-        this.$http.post("http://localhost:8000/contacorrente/realizasaque/" + this.numeroConta + "/" + this.agencia, { valor: this.valor, tipo: this.tipo })
+        this.$http.post( apiUrl + "http://localhost:8000/contacorrente/realizasaque/" + this.numeroConta + "/" + this.agencia, 
+          { valor: this.valor, tipo: this.tipo }, { headers: getHeader()})
           .then(
             () => this.$swal({
               toast: true,

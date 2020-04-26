@@ -20,8 +20,28 @@ Vue.use(VueRouter);
 Vue.use(VueTheMask);
 Vue.use(VueSweetalert2);
 
+const router = new VueRouter({ mode: 'history', routes: routes });
 
-const router = new VueRouter({ routes });
+
+router.beforeEach((to, from, next) => {
+
+  if (to.meta.requiresAuth) {
+
+    console.log(to.meta.requiresAuth);
+    const usuarioAutorizado = JSON.parse(window.localStorage.getItem('usuarioAutorizado'));
+    if (usuarioAutorizado && usuarioAutorizado.access_token) {
+
+      next();
+    } else {
+
+      next({ name: 'Login' });
+    }
+  } else {
+    
+    next();
+  }
+})
+
 
 new Vue({
   el: '#app',

@@ -16,6 +16,8 @@
   </table>
 </template>
 <script>
+import { apiUrl, getHeader } from '../../config.js';
+
 export default {
   data() {
     return {
@@ -25,7 +27,7 @@ export default {
   },
   created() {
     this.$http
-      .get("http://localhost:8000/transacoes")
+      .get(apiUrl + "/transacoes", { headers: getHeader() })
       .then(resposta => resposta.json())
       .then(
         transacoes => (this.transacoes = transacoes),
@@ -33,7 +35,10 @@ export default {
       );
 
     this.$http
-      .get("http://localhost:8000/contacorrente/saldo/87878754/545899-9")
+      .get(apiUrl + "/contacorrente/saldo/" + 
+        JSON.parse(window.localStorage.getItem('usuarioAutorizado')).numero_conta + 
+        "/" + JSON.parse(window.localStorage.getItem('usuarioAutorizado')).agencia,
+        { headers: getHeader() })
       .then(resposta => resposta.json())
       .then(
         contaCorrente => (this.contaCorrente = contaCorrente),

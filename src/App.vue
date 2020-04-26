@@ -1,35 +1,16 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link class="navbar-brand" to="/">
-        <img
-          src="src/assets/capgemini-logo.png"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt
-        />
-        {{ titulo }}
-      </router-link>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/realizartransacao">Realizar transação</router-link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <div class="container">
+    <menu-aplicacao></menu-aplicacao>
     <transition name="muda-pagina">
       <router-view></router-view>
     </transition>
   </div>
 </template>
 <script>
+import Menu from './components/fragmento/Menu.vue'
 export default {
-  data() {
-    return {
-      titulo: "Banco Capgemini"
-    };
+  components: {
+    "menu-aplicacao": Menu
   }
 };
 </script>
@@ -41,6 +22,6 @@ export default {
 }
 .muda-pagina-enter,
 .muda-pagina-leave-active {
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 </style>
