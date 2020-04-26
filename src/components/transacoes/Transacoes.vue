@@ -1,24 +1,33 @@
 <template>
-  <table class="table table-hover">
-    <tbody>
-      <tr v-for="transacao of transacoes" :key="transacao.codigo">
-        <td>R$ {{ transacao.valor.replace('.', ',') }}</td>
-        <td
-          v-if="transacao.tipo === 'DEPOSITO'"
-          style="color: green;"
-        >{{ transacao.tipo.toLowerCase() }}</td>
-        <td v-else style="color: red;">{{ transacao.tipo.toLowerCase() }}</td>
-      </tr>
-    </tbody>
-    <span class="navbar-text">
-      <a href style="color: green;">Saldo R$ {{ contaCorrente.saldo }}</a>
-    </span>
-  </table>
+  <div>
+    <menu-aplicacao></menu-aplicacao>
+    <div class="container">
+      <table class="table table-hover">
+        <tbody>
+          <tr v-for="transacao of transacoes" :key="transacao.codigo">
+            <td>R$ {{ transacao.valor.replace('.', ',') }}</td>
+            <td
+              v-if="transacao.tipo === 'DEPOSITO'"
+              style="color: green;"
+            >{{ transacao.tipo.toLowerCase() }}</td>
+            <td v-else style="color: red;">{{ transacao.tipo.toLowerCase() }}</td>
+          </tr>
+        </tbody>
+        <span class="navbar-text">
+          <a href style="color: green;">Saldo R$ {{ contaCorrente.saldo }}</a>
+        </span>
+      </table>
+    </div>
+  </div>
 </template>
 <script>
-import { apiUrl, getHeader } from '../../config.js';
+import { apiUrl, getHeader } from "../../config.js";
+import Menu from "../fragmento/Menu.vue";
 
 export default {
+  components: {
+    "menu-aplicacao": Menu
+  },
   data() {
     return {
       transacoes: [],
@@ -35,10 +44,15 @@ export default {
       );
 
     this.$http
-      .get(apiUrl + "/contacorrente/saldo/" + 
-        JSON.parse(window.localStorage.getItem('usuarioAutorizado')).numero_conta + 
-        "/" + JSON.parse(window.localStorage.getItem('usuarioAutorizado')).agencia,
-        { headers: getHeader() })
+      .get(
+        apiUrl +
+          "/contacorrente/saldo/" +
+          JSON.parse(window.localStorage.getItem("usuarioAutorizado"))
+            .numero_conta +
+          "/" +
+          JSON.parse(window.localStorage.getItem("usuarioAutorizado")).agencia,
+        { headers: getHeader() }
+      )
       .then(resposta => resposta.json())
       .then(
         contaCorrente => (this.contaCorrente = contaCorrente),

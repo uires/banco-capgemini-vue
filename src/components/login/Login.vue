@@ -1,6 +1,5 @@
 <template>
   <div>
-    <menu></menu>
     <div class="container">
       <div class="row">
         <img src="src/assets/capgemini-logo.png" width="100" height="100" />
@@ -23,11 +22,8 @@
 <script>
 import { apiUrlLogin, getHeader, userUrl } from "../../config.js";
 import { clientSecret, clientId } from "../../env.js";
-import Menu from '../fragmento/Menu.vue';
+import Menu from "../fragmento/Menu.vue";
 export default {
-  components: {
-    Menu
-  },
   data() {
     return {
       login: {

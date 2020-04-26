@@ -1,18 +1,10 @@
 <template>
-  <div class="container">
-    <menu-aplicacao></menu-aplicacao>
-    <transition name="muda-pagina">
-      <router-view></router-view>
-    </transition>
-  </div>
+  <transition name="muda-pagina">
+    <router-view></router-view>
+  </transition>
 </template>
 <script>
-import Menu from './components/fragmento/Menu.vue'
-export default {
-  components: {
-    "menu-aplicacao": Menu
-  }
-};
+export default {};
 </script>
 
 <style>
@@ -22,6 +14,8 @@ export default {
 }
 .muda-pagina-enter,
 .muda-pagina-leave-active {
-  transition: opacity 0.3s;
+  transition-duration: 0.1s;
+  transition-property: opacity;
+  transition-timing-function: ease;
 }
 </style>
